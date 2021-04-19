@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="splash_title_text_size">35dp</dimen>
+    <dimen name="button_background_radius">10dp</dimen>
+    <dimen name="auth_header_image_height">16sp</dimen>
+
+</resources>

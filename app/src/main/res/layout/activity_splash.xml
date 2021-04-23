@@ -9,13 +9,14 @@
     android:gravity="center"
     android:background="@drawable/my_gradient_drawable">
 
-    <com.example.ecommerce.utils.MSPTextViewBold
+    <TextView
         android:id="@+id/splash_tv_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="@dimen/splash_title_text_size"
         android:textColor="@color/colorWhite"
+        android:textStyle="bold"
         android:text="E-Commerce"/>
 
 </LinearLayout>

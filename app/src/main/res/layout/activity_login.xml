@@ -20,7 +20,7 @@
     </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/signin_layout"
+        android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_fl_header"
@@ -58,7 +58,7 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.example.ecommerce.utils.MSPTextView
+        <TextView
             android:id="@+id/login_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
             android:foreground="?attr/selectableItemBackground"
             android:text="forgot password?" />
 
-        <com.example.ecommerce.utils.MSPButton
+        <Button
             android:id="@+id/login_btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,6 +76,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/button_background"
+            android:textColor="@color/colorWhite"
             android:text="@string/login"/>
 
         <LinearLayout
@@ -84,13 +85,13 @@
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_marginBottom="100dp">
-            <com.example.ecommerce.utils.MSPTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Don't have an account?"/>
 
-            <com.example.ecommerce.utils.MSPTextView
+            <TextView
                 android:id="@+id/login_tv_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

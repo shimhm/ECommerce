@@ -4,12 +4,15 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.example.ecommerce.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +29,16 @@ class RegisterActivity : AppCompatActivity() {
             )
         }
 
+        setupActionBar()
+
         register_tv_login.setOnClickListener {
             val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
+        }
+
+        register_btn_register.setOnClickListener {
+            registerUser()
         }
     }
 
@@ -46,5 +55,76 @@ class RegisterActivity : AppCompatActivity() {
 
         my_toolbar.setNavigationOnClickListener { onBackPressed() }
 
+    }
+
+    // new user 등장
+    private fun validateRegisterDetails(): Boolean{
+        return when {
+            TextUtils.isEmpty(register_edt_first_name.text.toString().trim(){it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_first_name), true)
+                false
+            }
+            TextUtils.isEmpty(register_edt_last_name.text.toString().trim(){it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_last_name), true)
+                false
+            }
+            TextUtils.isEmpty(register_edt_email.text.toString().trim(){it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_email), true)
+                false
+            }
+            TextUtils.isEmpty(register_edt_password.text.toString().trim(){it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_password), true)
+                false
+            }
+            TextUtils.isEmpty(register_edt_password_confirm.text.toString().trim(){it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_password_confirm), true)
+                false
+            }
+            register_edt_password.text.toString().trim { it <= ' ' } !=
+                    register_edt_password_confirm.text.toString().trim { it <= ' ' } -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_password_and_confirm_password_mismatch), true)
+                false
+            }
+            !register_cb_condition.isChecked -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_check_condition), true)
+                false
+            }
+            else -> {
+                //showErrorSnackBar("Your details are valid", false)
+                true
+            }
+        }
+    }
+
+    private fun registerUser() {
+        if(validateRegisterDetails()){
+
+            showProgress(resources.getString(R.string.please_wait))
+
+            val email: String = register_edt_email.text.toString().trim { it <= ' ' }
+            val password: String = register_edt_password.text.toString().trim { it <= ' ' }
+
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+
+                    hideProgressDialog()
+
+                    if(task.isSuccessful){
+
+                        val firebaseUser : FirebaseUser = task.result!!.user
+
+                        showErrorSnackBar("Your are registered successfully. Your userID is ${firebaseUser.uid}", false)
+
+                        FirebaseAuth.getInstance().signOut()
+                        finish()
+
+
+                    }else{
+
+                        showErrorSnackBar(task.exception!!.message.toString(), true)
+
+                    }
+                }
+        }
     }
 }

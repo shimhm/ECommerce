@@ -10,6 +10,9 @@
     <color name="colorPrimaryText">#222934</color>
     <color name="colorSecondaryText">#989898</color>
 
+    <color name="colorSnackBarError">#FF0000</color>
+    <color name="colorSnackBarSuccess">#529B00</color>
+
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
 </resources>

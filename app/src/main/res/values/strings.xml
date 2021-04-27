@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">ECommerce</string>
+
     <string name="content_description">image</string>
     <string name="login">LOGIN</string>
     <string name="hint_email">Email ID</string>
@@ -16,4 +17,7 @@
     <string name="err_msg_check_condition">Please agree terms and condition</string>
 
     <string name="please_wait">Please wait&#82300;</string>
+
+    <string name="forgot_password">Enter your username and e-mail address. we wll send you a email to reset your password.</string>
+
 </resources>
